@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.15)
-set(CMAKE_TOOLCHAIN_FILE "${CMAKE_CURRENT_LIST_DIR}/vcpkg/scripts/buildsystems/vcpkg.cmake")
+#set(CMAKE_TOOLCHAIN_FILE "${CMAKE_CURRENT_LIST_DIR}/vcpkg/scripts/buildsystems/vcpkg.cmake")
 project(node-mapnik)
 
 set(MAPBOX_WAGYU_INCLUDE_DIRS "${CMAKE_CURRENT_SOURCE_DIR}/deps/wagyu/include" CACHE INTERNAL "wagyu include dir")
@@ -24,8 +24,8 @@ FetchContent_Declare(
 )
 FetchContent_Declare(
   mapnik_vector_tile
-  GIT_REPOSITORY https://github.com/mathisloge/mapnik-vector-tile.git
-  GIT_TAG        4ad96069d5241a592d326ee0eca1ce89cf33372f
+  GIT_REPOSITORY https://github.com/3nprob/mapnik-vector-tile.git
+  GIT_TAG        b6eb1e6dacd8f20de3439aaf199b678a4355ab1a
   GIT_SUBMODULES "src" # https://gitlab.kitware.com/cmake/cmake/-/issues/20579
 )
 FetchContent_MakeAvailable(mapnik_vector_tile napi_modules)
@@ -81,16 +81,16 @@ add_library(node-mapnik MODULE
     src/mapnik_featureset.cpp
     src/mapnik_expression.cpp
     src/mapnik_cairo_surface.cpp
-    src/mapnik_vector_tile.cpp
-    src/mapnik_vector_tile_data.cpp
-    src/mapnik_vector_tile_query.cpp
-    src/mapnik_vector_tile_json.cpp
-    src/mapnik_vector_tile_info.cpp
-    src/mapnik_vector_tile_simple_valid.cpp
-    src/mapnik_vector_tile_render.cpp
-    src/mapnik_vector_tile_clear.cpp
-    src/mapnik_vector_tile_image.cpp
-    src/mapnik_vector_tile_composite.cpp
+    #src/mapnik_vector_tile.cpp
+    #src/mapnik_vector_tile_data.cpp
+    #src/mapnik_vector_tile_query.cpp
+    #src/mapnik_vector_tile_json.cpp
+    #src/mapnik_vector_tile_info.cpp
+    #src/mapnik_vector_tile_simple_valid.cpp
+    #src/mapnik_vector_tile_render.cpp
+    #src/mapnik_vector_tile_clear.cpp
+    #src/mapnik_vector_tile_image.cpp
+    #src/mapnik_vector_tile_composite.cpp
 )
 set_target_properties(node-mapnik PROPERTIES PREFIX "" OUTPUT_NAME "mapnik" SUFFIX ".node")
 target_include_directories(node-mapnik PRIVATE 
@@ -115,7 +115,7 @@ target_link_libraries(node-mapnik
     mapbox-wagyu
     mapbox-protozero
     node::napi
-    mapnik::mapnik-vector-tile
+    #    mapnik::mapnik-vector-tile
 )
 
 # post build
