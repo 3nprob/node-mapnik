@@ -119,12 +119,19 @@ target_link_libraries(node-mapnik
 )
 
 # post build
+if(EXISTS "${CMAKE_INSTALL_PREFIX}/")
+    add_custom_command(TARGET node-mapnik POST_BUILD 
+        COMMAND ${CMAKE_COMMAND} -E rm -r "${CMAKE_INSTALL_PREFIX}/"
+    )
+endif()
 file(GENERATE 
     OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/$<CONFIG>_copy.cmake" 
     INPUT "${CMAKE_CURRENT_SOURCE_DIR}/cmake/post_build.cmake"
 )
 
 # installation
+
+
 macro(install_variable var)
     install(CODE "set(${var} \"${${var}}\")")
 endmacro()
